@@ -8,7 +8,7 @@ import asyncio
 import sqlite3
 from crud_functions import initiate_db , get_all_products
 
-api = "7668937986:AAFb5zx4n76KhvIJRTbSJLQ4xxTbc5DdWlA"
+api = " "
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
