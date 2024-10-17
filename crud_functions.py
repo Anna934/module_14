@@ -42,4 +42,37 @@ def get_all_products():
     connection.close()  # Закрываем соединение после выполнения запроса
     return products
 
-    
+connection = sqlite3.connect('Users.db')
+cursor = connection.cursor()
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS Users(
+Id INTEGER PRIMARY KEY,
+username TEXT NOT NULL,
+email TEXT NOT NULL,
+ age INTEGER NOT NULL,
+balance INTEGER NOT NULL
+ )
+''')
+
+def add_user(username, email, age):
+    connection = sqlite3.connect('Users.db')
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO Users (username, email, age, balance) VALUES (?, ?, ?, ?)',
+                   (f'{username}', f'{email}', f'{age}', f'{1000}'))
+    connection.commit()
+
+
+def is_included(username):
+    connection = sqlite3.connect('Users.db')
+    cursor = connection.cursor()
+    check_users = cursor.execute('SELECT * FROM Users WHERE username = ?', (username,))
+    if check_users.fetchone() is None:
+        return False
+    else:
+        return True
+
+
+connection.commit()
+connection.close()
+
